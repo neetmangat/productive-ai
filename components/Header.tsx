@@ -76,7 +76,7 @@ function Header() {
             } flex items-center text-[#0055D1] dark:text-white`}
           >
             <UserCircleIcon className="inline-block h-10 w-10  mr-1" />
-            <p className="font-light italic ">
+            <p className="font-light italic text-sm md:text-base">
               Your personal assistant is summarizing the tasks for today...
             </p>
           </div>
