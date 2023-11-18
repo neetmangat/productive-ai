@@ -5,6 +5,7 @@ import logo from "@/assets/logo.png";
 import Image from "next/image";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import Avatar from "react-avatar";
+import Link from "next/link";
 
 function Header() {
   const [search, setSearch] = useState("");
@@ -64,7 +65,12 @@ function Header() {
           </form>
 
           {/* Avatar */}
-          <Avatar name="Neet Mangat" size="50" round color="#B423F8" />
+          <Link
+            href="https://github.com/neetmangat/productive-ai"
+            target="_blank"
+          >
+            <Avatar name="Neet Mangat" size="50" round color="#B423F8" />
+          </Link>
         </div>
       </div>
 
