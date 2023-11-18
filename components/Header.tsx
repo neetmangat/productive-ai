@@ -17,7 +17,7 @@ function Header() {
 
   return (
     <header className="">
-      <div className="flex flex-col md:flex-row items-center p-5 bg-slate-100/20 rounded-b-2xl md:rounded-none">
+      <div className="flex flex-col md:flex-row items-center p-5 bg-gray-500/10 dark:bg-slate-100/20 rounded-b-2xl md:rounded-none">
         <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-[#0055D1] to-[#DC5CF9] rounded-md filter blur-3xl opacity-50 -z-50" />
         {/* Logo */}
         {/* <Image
@@ -48,12 +48,12 @@ function Header() {
           {/* Search Box */}
           <form
             onSubmit={handleSubmit}
-            className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial"
+            className="flex items-center space-x-5 bg-white dark:bg-slate-900/70 rounded-md p-2 shadow-md flex-1 md:flex-initial"
           >
             <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
             <input
               type="text"
-              className="flex-1 outline-none p-2 dark:bg-white"
+              className="flex-1 outline-none p-2 dark:bg-slate-900/0"
               placeholder="Search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -69,10 +69,14 @@ function Header() {
       </div>
 
       <div className="flex items-center justify-center px-5 py-2 md:py-5">
-        <div className="flex items-center p-5 bg-white rounded-xl shadow-xl w-fit max-w-3xl">
-          <div className={`${!summary && "animate-pulse"} flex items-center`}>
-            <UserCircleIcon className="inline-block h-10 w-10 text-[#0055D1] mr-1" />
-            <p className="font-light italic text-[#0055D1]">
+        <div className="flex items-center p-5 bg-white dark:bg-slate-900/70 rounded-xl shadow-xl w-fit max-w-3xl">
+          <div
+            className={`${
+              !summary && "animate-pulse"
+            } flex items-center text-[#0055D1] dark:text-white`}
+          >
+            <UserCircleIcon className="inline-block h-10 w-10  mr-1" />
+            <p className="font-light italic ">
               Your personal assistant is summarizing the tasks for today...
             </p>
           </div>
