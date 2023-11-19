@@ -6,24 +6,28 @@ import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import Column from "./Column";
 
 function Board() {
-  const [board, getBoard, setBoardState] = useBoardStore((state) => [
-    state.board,
-    state.getBoard,
-    state.setBoardState,
-  ]);
+  const [board, getBoard, setBoardState, updateTodoInDB] = useBoardStore(
+    (state) => [
+      state.board,
+      state.getBoard,
+      state.setBoardState,
+      state.updateTodoInDB,
+    ]
+  );
 
   useEffect(() => {
     getBoard();
   }, [getBoard]);
 
   const handleOnDragEnd = (result: DropResult) => {
+    console.log(board);
     const { destination, source, type } = result;
 
     // Check if user dragged card outside of board
     if (!destination) return;
 
-    // Handle a column drag
     if (type === "column") {
+      // Handle a column drag
       const entries = Array.from(board.columns.entries());
       const [removed] = entries.splice(source.index, 1);
       entries.splice(destination.index, 0, removed);
@@ -32,14 +36,13 @@ function Board() {
         ...board,
         columns: rearragnedColumns,
       });
+      return;
     }
 
     // Handle a todo drag
     const columns = Array.from(board.columns);
     const startColIndex = columns[Number(source.droppableId)];
     const finishColIndex = columns[Number(destination.droppableId)];
-
-    console.log({ startColIndex, finishColIndex });
 
     const startCol: Column = {
       id: startColIndex[0],
@@ -55,9 +58,7 @@ function Board() {
     if (!startCol || !finishCol) return;
 
     // Handle no change
-    if (source.index === destination.index && startCol === finishCol) {
-      return;
-    }
+    if (source.index === destination.index && startCol === finishCol) return;
 
     const newTodos = startCol.todos;
     const [todoMoved] = newTodos.splice(source.index, 1);
@@ -71,6 +72,10 @@ function Board() {
       };
       const newColumns = new Map(board.columns);
       newColumns.set(startCol.id, newCol);
+
+      // Update DB
+      // updateTodoInDB(todoMoved, startCol.id);
+      console.log(todoMoved);
 
       setBoardState({ ...board, columns: newColumns });
     } else {
@@ -87,6 +92,8 @@ function Board() {
         id: finishCol.id,
         todos: finishTodos,
       });
+
+      updateTodoInDB(todoMoved, finishCol.id);
 
       setBoardState({ ...board, columns: newColumns });
     }
