@@ -6,14 +6,18 @@ import Image from "next/image";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import Avatar from "react-avatar";
 import Link from "next/link";
+import useBoardStore from "@/store/BoardStore";
 
 function Header() {
-  const [search, setSearch] = useState("");
+  const [searchString, setSearchString] = useBoardStore((state) => [
+    state.searchString,
+    state.setSearchString,
+  ]);
   const [summary, setSummary] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Submitted! " + search);
+    alert("Submitted! " + searchString);
   };
 
   return (
@@ -56,8 +60,8 @@ function Header() {
               type="text"
               className="flex-1 outline-none p-2 dark:bg-slate-900/0"
               placeholder="Search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={searchString}
+              onChange={(e) => setSearchString(e.target.value)}
             />
             <button hidden type="submit">
               Search
