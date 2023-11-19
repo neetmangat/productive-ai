@@ -35,7 +35,7 @@ function Column({ id, todos, index }: Props) {
                 ref={provided.innerRef}
                 className={`p-2 rounded-2xl shadow-sm ${
                   snapshot.isDraggingOver
-                    ? "bg-green-200"
+                    ? "bg-green-200 dark:bg-white/40"
                     : "bg-white/50 dark:bg-slate-100/20"
                 }`}
               >
