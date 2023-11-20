@@ -21,7 +21,6 @@ function Board() {
 
   const handleOnDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
-    console.log(board);
 
     // Check if user dragged card outside of board
     if (!destination) return;
@@ -73,7 +72,7 @@ function Board() {
       const newColumns = new Map(board.columns);
       newColumns.set(startCol.id, newCol);
 
-      // Update DB
+      // TODO: Update DB
       // updateTaskInDB(todoMoved, startCol.id);
       console.log(todoMoved);
 
