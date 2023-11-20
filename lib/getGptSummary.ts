@@ -1,4 +1,4 @@
-import formatTodosForGpt from "./formatTodosFoGpt";
+import formatTodosForGpt from "./formatTodosForGpt";
 
 export default async function getGptSummary(board: Board) {
   const todos = formatTodosForGpt(board);

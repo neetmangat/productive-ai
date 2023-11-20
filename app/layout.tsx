@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import Modal from "@/components/Modal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
 
+          <Modal />
           <ThemeSwitcher />
         </ThemeProvider>
       </body>

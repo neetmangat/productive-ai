@@ -1,18 +1,18 @@
 "use client";
 
-import useBoardStore from "@/store/BoardStore";
+import { useBoardStore } from "@/store/BoardStore";
 import { useEffect } from "react";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import Column from "./Column";
 
 function Board() {
-  const [board, getBoard, setBoardState, updateTodoInDB, deleteTodo] =
+  const [board, getBoard, setBoardState, updateTaskInDB, deleteTask] =
     useBoardStore((state) => [
       state.board,
       state.getBoard,
       state.setBoardState,
-      state.updateTodoInDB,
-      state.deleteTodo,
+      state.updateTaskInDB,
+      state.deleteTask,
     ]);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ function Board() {
       newColumns.set(startCol.id, newCol);
 
       // Update DB
-      // updateTodoInDB(todoMoved, startCol.id);
+      // updateTaskInDB(todoMoved, startCol.id);
       console.log(todoMoved);
 
       setBoardState({ ...board, columns: newColumns });
@@ -93,7 +93,7 @@ function Board() {
         todos: finishTodos,
       });
 
-      updateTodoInDB(todoMoved, finishCol.id);
+      updateTaskInDB(todoMoved, finishCol.id);
 
       setBoardState({ ...board, columns: newColumns });
     }

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import Avatar from "react-avatar";
 import Link from "next/link";
-import useBoardStore from "@/store/BoardStore";
+import { useBoardStore } from "@/store/BoardStore";
 import getGptSummary from "@/lib/getGptSummary";
 
 function Header() {
@@ -34,7 +34,7 @@ function Header() {
       setLoading(false);
     };
 
-    fetchSuggestionFunc();
+    // fetchSuggestionFunc();
   }, [board]);
 
   return (
