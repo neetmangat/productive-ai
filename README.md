@@ -1,28 +1,34 @@
-## The IMGenerator
+# Productive.AI
 
-# Production
+## Production
 
 - Deployment Link: https://productive-ai.vercel.app
 - GitHub Repo Link: https://github.com/neetmangat/productive-ai
 - YouTube Build Link: https://www.youtube.com/watch?v=1KPG3LiE4jU&t=22455s
 
-# Development
+## Development
 
-1. Generate your own Appwrite account, project, database, storage, and
-   integration platform whitelist at [http://appwrite.io](Appwrite Platform)
+1. Clone the repository and install dependencies
 
-2. Generate your own OpenAI API key at [http://platform.openai.com](OpenAI Platform)
-
-3. Add the server environment variables
-
+```bash
+git clone https://github.com/neetmangat/productive-ai.git productive-ai && cd productive-ai && npm install
 ```
+
+2. Generate your own account, project, database, storage, and
+   integration whitelist on the [Appwrite Cloud](http://appwrite.io)
+
+3. Generate your own OpenAI API key on the [OpenAI Platform](http://platform.openai.com)
+
+4. Add the server environment variables
+
+```bash
 cp .env.example .env.local
 ```
 
-4. Run the development server:
+5. Run the development server:
 
 ```bash
 yarn run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
