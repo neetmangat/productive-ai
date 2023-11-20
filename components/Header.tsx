@@ -34,7 +34,8 @@ function Header() {
       setLoading(false);
     };
 
-    // fetchSuggestionFunc();
+    // Enable or Disable GPT Fetch Here
+    fetchSuggestionFunc();
   }, [board]);
 
   return (
