@@ -10,9 +10,11 @@ interface BoardState {
 
   searchString: string;
   setSearchString: (searchString: string) => void;
+
+  deleteTodo: (todo: Todo) => void;
 }
 
-const useBoardStore = create<BoardState>((set) => ({
+const useBoardStore = create<BoardState>((set, get) => ({
   board: {
     columns: new Map<TypedColumn, Column>(),
   },
@@ -38,6 +40,10 @@ const useBoardStore = create<BoardState>((set) => ({
 
   searchString: "",
   setSearchString: (searchString) => set({ searchString }),
+
+  deleteTodo: async (taskIndex: number, todo: Todo, id: TypedColumn) => {
+    const newColumns = new Map(get().board.columns);
+  },
 }));
 
 export default useBoardStore;

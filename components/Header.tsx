@@ -1,24 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
 import Image from "next/image";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import Avatar from "react-avatar";
 import Link from "next/link";
 import useBoardStore from "@/store/BoardStore";
+import getGptSummary from "@/lib/getGptSummary";
 
 function Header() {
-  const [searchString, setSearchString] = useBoardStore((state) => [
+  const [board, searchString, setSearchString] = useBoardStore((state) => [
+    state.board,
     state.searchString,
     state.setSearchString,
   ]);
-  const [summary, setSummary] = useState("");
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [summary, setSummary] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("Submitted! " + searchString);
   };
+
+  useEffect(() => {
+    if (board.columns.size === 0) return;
+    setLoading(true);
+
+    const fetchSuggestionFunc = async () => {
+      const suggestion = await getGptSummary(board);
+      setSummary(suggestion);
+      setLoading(false);
+    };
+
+    fetchSuggestionFunc();
+  }, [board]);
 
   return (
     <header className="">
@@ -85,9 +102,14 @@ function Header() {
               !summary && "animate-pulse"
             } flex items-center text-[#0055D1] dark:text-white`}
           >
-            <UserCircleIcon className="inline-block h-10 w-10  mr-1" />
+            <UserCircleIcon
+              className={`inline-block h-10 w-10 mr-2 ${
+                loading && "animate-spin"
+              }`}
+            />
             <p className="font-light italic text-sm md:text-base">
-              Your personal assistant is summarizing the tasks for today...
+              {summary ||
+                "Your personal assistant is summarizing the tasks for today..."}
             </p>
           </div>
         </div>
